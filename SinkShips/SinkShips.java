@@ -88,55 +88,66 @@ public class SinkShips{
 
 		if (ship.getLength() == 5){ // kollar om skeppet har längden 5
 			if(shipAmount[0] < 1){ // kollar så att alla skepp av typen är placerade
-				if (canPlace(board, xCord, yCord, ship)){
-					switch(ship.getDir()){ // kollar riktningen på skeppet
-						case 'N': if((yCord - ship.getLength()) >= 0){ //kollar så att det ryms på spelplanen
-							for (int i = 0; i < ship.getLength(); i++){  // lopar igenom skepplängden
-								board[(26*(yCord - i)) + xCord] = ship.getGraphics(i); // och sätter den kooardinaten i spelplanen till skeppets char 
-							}
-							shipAmount[0]++; // ökar mänden skepp av typen som är placerade 
-							break;
-							}
-							else{ // Om skeppet inte rymms
-								System.out.println("That ship does not fit there");
+				switch(ship.getDir()){ // kollar riktningen på skeppet
+					case 'N':
+						if((yCord - ship.getLength()) >= 0){ //kollar så att det ryms på spelplanen
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){  // lopar igenom skepplängden
+									board[(26*(yCord - i)) + xCord] = ship.getGraphics(i); // och sätter den kooardinaten i spelplanen till skeppets char 
+								}
+								shipAmount[0]++; // ökar mänden skepp av typen som är placerade 
 								break;
+								}
+								else{ // Om skeppet inte rymms
+									System.out.println("That ship does not fit there");
+									break;
+								}
 							}
 
-						case 'E': if((xCord + ship.getLength()) < 27){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
+					case 'E':
+						if((xCord + ship.getLength()) < 27){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
+						}
 
-						case 'S': if((yCord + ship.getLength()) < 12){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
+					case 'S': 
+						if((yCord + ship.getLength()) < 12){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 							}
+						}
 
-						case 'W': if((xCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
+					case 'W':
+						if((xCord - ship.getLength()) >= 0){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
-					}
+						}
+					
 				} 
 			}
 			else{ // om alla skepp är placerade 
@@ -144,171 +155,204 @@ public class SinkShips{
 			}
 		}
 		else if(ship.getLength() == 4){ // samma som med fem skeppen fast med fyror
-			if(shipAmount[0] < 2){
-				if (canPlace(board, xCord, yCord, ship)){
-					switch(ship.getDir()){
-						case 'N': if((yCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord - i)) + xCord] = ship.getGraphics(i);
+			if(shipAmount[0] < 2){ // kollar så att alla skepp av typen är placerade
+				switch(ship.getDir()){ // kollar riktningen på skeppet
+					case 'N':
+						if((yCord - ship.getLength()) >= 0){ //kollar så att det ryms på spelplanen
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){  // lopar igenom skepplängden
+									board[(26*(yCord - i)) + xCord] = ship.getGraphics(i); // och sätter den kooardinaten i spelplanen till skeppets char 
+								}
+								shipAmount[0]++; // ökar mänden skepp av typen som är placerade 
+								break;
+								}
+								else{ // Om skeppet inte rymms
+									System.out.println("That ship does not fit there");
+									break;
+								}
 							}
-							shipAmount[0] += 1;
-							break;
+
+					case 'E':
+						if((xCord + ship.getLength()) < 27){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
+						}
 
-						case 'E': if((xCord + ship.getLength()) < 27){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+					case 'S': 
+						if((yCord + ship.getLength()) < 12){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
-							shipAmount[0] += 1;
-							break;
+							else{
+								System.out.println("That ship does not fit there");
+							}
+						}
+
+					case 'W':
+						if((xCord - ship.getLength()) >= 0){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
-
-						case 'S': if((yCord + ship.getLength()) < 12){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
-							}
-							else{
-								System.out.println("That ship does not fit there");
-							}
-
-						case 'W': if((xCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
-							}
-							else{
-								System.out.println("That ship does not fit there");
-								break;
-							}
-					}
-				}
+						}
+					
+				} 
 			}
 			else{
 				System.out.println("You've placed all your Battleships");
 			}
 		}
 		else if(ship.getLength() == 3){
-			if(shipAmount[0] < 4){
-				if (canPlace(board, xCord, yCord, ship)){
-					switch(ship.getDir()){
-						case 'N': if((yCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord - i)) + xCord] = ship.getGraphics(i);
+			if(shipAmount[0] < 5){ // kollar så att alla skepp av typen är placerade
+				switch(ship.getDir()){ // kollar riktningen på skeppet
+					case 'N':
+						if((yCord - ship.getLength()) >= 0){ //kollar så att det ryms på spelplanen
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){  // lopar igenom skepplängden
+									board[(26*(yCord - i)) + xCord] = ship.getGraphics(i); // och sätter den kooardinaten i spelplanen till skeppets char 
+								}
+								shipAmount[0]++; // ökar mänden skepp av typen som är placerade 
+								break;
+								}
+								else{ // Om skeppet inte rymms
+									System.out.println("That ship does not fit there");
+									break;
+								}
 							}
-							shipAmount[0]++;
-							break;
+
+					case 'E':
+						if((xCord + ship.getLength()) < 27){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
+						}
 
-						case 'E': if((xCord + ship.getLength()) < 27){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+					case 'S': 
+						if((yCord + ship.getLength()) < 12){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
-							shipAmount[0]++;
-							break;
+							else{
+								System.out.println("That ship does not fit there");
+							}
+						}
+
+					case 'W':
+						if((xCord - ship.getLength()) >= 0){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
-
-						case 'S': if((yCord + ship.getLength()) < 12){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
-							}
-							else{
-								System.out.println("That ship does not fit there");
-							}
-
-						case 'W': if((xCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
-							}
-							else{
-								System.out.println("That ship does not fit there");
-								break;
-							}
-					}
-				}
+						}
+					
+				} 
 			}
 			else{
 				System.out.println("You've placed all your Submarines");
 			}
 		}
 		else if(ship.getLength() == 2){
-			if(shipAmount[0] < 5){
-				if (canPlace(board, xCord, yCord, ship)){
-					switch(ship.getDir()){
-						case 'N': if((yCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord - i)) + xCord] = ship.getGraphics(i);
+			if(shipAmount[0] < 6){ // kollar så att alla skepp av typen är placerade
+				switch(ship.getDir()){ // kollar riktningen på skeppet
+					case 'N':
+						if((yCord - ship.getLength()) >= 0){ //kollar så att det ryms på spelplanen
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){  // lopar igenom skepplängden
+									board[(26*(yCord - i)) + xCord] = ship.getGraphics(i); // och sätter den kooardinaten i spelplanen till skeppets char 
+								}
+								shipAmount[0]++; // ökar mänden skepp av typen som är placerade 
+								break;
+								}
+								else{ // Om skeppet inte rymms
+									System.out.println("That ship does not fit there");
+									break;
+								}
 							}
-							shipAmount[0]++;
-							break;
+
+					case 'E':
+						if((xCord + ship.getLength()) < 27){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
+						}
 
-						case 'E': if((xCord + ship.getLength()) < 27){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26* yCord) + (xCord + i)] = ship.getGraphics(i);
+					case 'S': 
+						if((yCord + ship.getLength()) < 12){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
-							shipAmount[0]++;
-							break;
+							else{
+								System.out.println("That ship does not fit there");
+							}
+						}
+
+					case 'W':
+						if((xCord - ship.getLength()) >= 0){
+							if (canPlace(board, xCord, yCord, ship)){ 
+								for (int i = 0; i < ship.getLength(); i++){
+									board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
+								}
+								shipAmount[0]++;
+								break;
 							}
 							else{
 								System.out.println("That ship does not fit there");
 								break;
 							}
-
-						case 'S': if((yCord + ship.getLength()) < 12){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*(yCord + i)) + xCord] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
-							}
-							else{
-								System.out.println("That ship does not fit there");
-							}
-
-						case 'W': if((xCord - ship.getLength()) >= 0){
-							for (int i = 0; i < ship.getLength(); i++){
-								board[(26*yCord) + (xCord - i)] = ship.getGraphics(i);
-							}
-							shipAmount[0]++;
-							break;
-							}
-							else{
-								System.out.println("That ship does not fit there");
-								break;
-							}
-					}
-				}
+						}
+					
+				} 
 			}
 			else{
 				System.out.println("You've placed all your Destroyers");
@@ -350,52 +394,129 @@ public class SinkShips{
 
 	public static boolean canPlace(char[] board, int xCord, int yCord, Ship ship){
 		boolean isPlaceble = true;
-		switch (ship.getDir()){
-			case 'N': 
-				for (int i = 0; i < ship.getLength(); i++){
-					if ( ship.graphics[i] == board[(yCord -i)*26 + xCord] || ship.graphics[1] == board[(yCord -i) *26 + xCord]
-				 		|| ship.graphics[ship.getLength() - 1] == board[(yCord -i) *26 + xCord]){
-				 		isPlaceble = false;
-				 		break;
-				 	}
-					else if (i == ship.getLength() - 1){
-						break;
+
+		switch(ship.getDir()){
+			case 'N':
+				if(yCord == 11 && (xCord != 1 && xCord != 25)){
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if(board[26*(yCord - i) + xCord] != 'X' || board[26*(yCord - i) + (xCord+1)] != 'X' || board[26*(yCord - i) + (xCord - 1)] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
+					}
+
+				}
+				else if (yCord == 5 && (xCord != 1 && xCord != 25)) {
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if (board[26*((yCord + 1) - i) + xCord] != 'X' || board[26*((yCord + 1) - i) + (xCord+1)] != 'X' || board[26*((yCord + 1) - i) + (xCord - 1)] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
 					}
 				}
-			case 'E': 
-				for (int i = 0; i < ship.getLength(); i++){
-					if ( ship.getGraphics(i) == board[yCord *26 + (xCord + i)] || ship.getGraphics(2) == board[yCord *26 + (xCord + i)]
-					 || ship.getGraphics(ship.getLength() - 1) == board[yCord *26 + (xCord + i)]){
-					 	isPlaceble = false;
-				 		break;
-					 }
-					else{
-						break;
+				else{
+					for (int i =0; i < ship.getLength() + 2; i++){
+						if (board[26*((yCord + 1) - i) + xCord] != 'X' || board[26*((yCord + 1) - i) + (xCord+1)] != 'X' || board[26*((yCord + 1) - i) + (xCord - 1)] != 'X'){
+							isPlaceble = false;
+							System.out.print("The location is to close to another ship!");
+							break;
+						}
 					}
 				}
+
+			case 'E':
+				if(xCord == 1){
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if(board[26*(yCord) + (xCord + i)] != 'X' || board[26*(yCord - 1) + (xCord + i)] != 'X' || board[26*(yCord + 1) + (xCord + i)] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
+					}
+
+				}
+				else if (yCord == 20) {
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if (board[26*(yCord) + (xCord - 1) + i] != 'X' || board[26*(yCord + 1) + (xCord - 1) + i] != 'X' || board[26*(yCord - 1) + (xCord - 1) + i] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
+					}
+				}
+				else{
+					for (int i =0; i < ship.getLength() + 2; i++){
+						if (board[26*(yCord) + (xCord - 1) + i] != 'X' || board[26*(yCord) + (xCord - 1) + i] != 'X' || board[26*(yCord) + (xCord - 1) + i] != 'X'){
+							isPlaceble = false;
+							System.out.print("The location is to close to another ship!");
+							break;
+						}
+					}
+				}
+
 			case 'S':
-				for (int i = 0; i < ship.getLength(); i++){
-					if ( ship.getGraphics(i) == board[(yCord +i)*26 + xCord] || ship.getGraphics(2) == board[(yCord +i) *26 + xCord]
-					 || ship.getGraphics(ship.getLength() - 1) == board[(yCord +i) *26 + xCord]){
-					 	isPlaceble = false;
-					 	break;
-					 }
-					else{
-						break;
+				if(yCord == 1){
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if(board[26*(yCord + i) + xCord] != 'X' || board[26*(yCord + i) + (xCord+1)] != 'X' || board[26*(yCord + i) + (xCord - 1)] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
+					}
+
+				}
+				else if (yCord == 5) {
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if (board[26*((yCord - 1) + i) + xCord] != 'X' || board[26*((yCord - 1) + i) + (xCord+1)] != 'X' || board[26*((yCord - 1) + i) + (xCord - 1)] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
 					}
 				}
-			case 'W': 
-				for (int i = 0; i < ship.getLength(); i++){
-					if ( ship.getGraphics(i) == board[(yCord -i)*26 + xCord] || ship.getGraphics(2) == board[(yCord -i) *26 + xCord]
-					 || ship.getGraphics(ship.getLength() - 1) == board[(yCord -i) *26 + xCord]){
-						isPlaceble = false;
-					 	break;
-					 }
-					else{
-						break;
+				else{
+					for (int i =0; i < ship.getLength() + 2; i++){
+						if (board[26*((yCord - 1) + i) + xCord] != 'X' || board[26*((yCord - 1) + i) + (xCord+1)] != 'X' || board[26*((yCord - 1) + i) + (xCord - 1)] != 'X'){
+							isPlaceble = false;
+							System.out.print("The location is to close to another ship!");
+							break;
+						}
+					}
+				}
+
+			case 'W':
+				if(xCord == 5){
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if(board[26*(yCord) + (xCord - i)] != 'X' || board[26*(yCord - 1) + (xCord - i)] != 'X' || board[26*(yCord + 1) + (xCord - i)] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
+					}
+
+				}
+				else if (yCord == 20) {
+					for (int i =0; i < ship.getLength() + 1; i++){
+						if (board[26*(yCord) + (xCord + 1) - i] != 'X' || board[26*(yCord + 1) + (xCord + 1) - i] != 'X' || board[26*(yCord - 1) + (xCord + 1) - i] != 'X'){
+							isPlaceble = false;
+							System.out.print("That location is too close to another ship!");
+							break;
+						}
+					}
+				}
+				else{
+					for (int i =0; i < ship.getLength() + 2; i++){
+						if (board[26*(yCord) + (xCord + 1) - i] != 'X' || board[26*(yCord) + (xCord + 1) - i] != 'X' || board[26*(yCord) + (xCord + 1) - i] != 'X'){
+							isPlaceble = false;
+							System.out.print("The location is to close to another ship!");
+							break;
+						}
 					}
 				}
 		}
+
 		return isPlaceble;
 	} 
 }
