@@ -7,7 +7,7 @@ public class SinkShips{
 		int[] fourShips ={0}; 
 		int[] threeShips ={0};
 		int[] twoShips ={0};
-		char[] playerBoard = new char[11*26]; //Spelarens spelplan 286 totala plattser
+		char[] playerBoard = new char[10*25]; //Spelarens spelplan 286 totala plattser
 		
 		boardMaker(playerBoard);
 		while(fiveShips[0] + fourShips[0] + threeShips[0] + twoShips[0] < 13 ){ // Placera skepp medans det ä under finns under 13
@@ -24,102 +24,97 @@ public class SinkShips{
 					break;
 				}
 				char[] inArray = input.toCharArray(); // Gör om input så att jag kan komma åt enskillda element
-				System.out.println(inArray);
-				int shipX = (int) inArray[0] - (int) 'A' + 1; // sparar X koordinaten
-				if(shipX < 1 || shipX > 25){
+				int shipX = (int) inArray[0] - (int) 'A'; // sparar X koordinaten
+				if(shipX < 0 || shipX > 24){
 					System.out.print("The X value was too big or small");
 					System.out.print("Try again");
 					continue;
 				}
-				System.out.println(shipX);
-				int shipY = (int) inArray[2] - (int) '0' + 1; // spara Y koordinaten
-				if (shipY < 1 || shipY > 10){
+				int shipY = (int) inArray[2] - (int) '0'; // spara Y koordinaten
+				if (shipY < 0 || shipY > 9){
 					System.out.print("The Y value was too big or small");
 					System.out.print("Try again");
 					continue;
 				}
-				System.out.println(shipY);
 				char shipDir = inArray[4]; // Sparar riktningen (N, E, S, W)
-				System.out.println(shipDir);
 				String shipType = new String(); // För lopen nedan
 				int shipLength = 0; // För att sedan kolla längd mot typ
 
 				for (int i = 6; i < input.length(); i++){ // skriver in skepptyp i en string
 					shipType += inArray[i];
-					System.out.println(shipType);
 				}
 				if(shipType.equals("Carrier")){ // kollar vilken skepptyp det är och ger den rätt längd
 					shipLength = 5;
-					if (shipX < 5 && shipDir == 'W'){
+					if (shipX < 4 && shipDir == 'W'){
 						System.out.println("A Carrier would not fit here if placed to the west.");
 						continue;
 					}
-					else if (shipX > 21 && shipDir == 'E') {
+					else if (shipX > 20 && shipDir == 'E') {
 						System.out.println("A Carrier would not fit here if placed to the east.");
 						continue;
 					}
-					else if (shipY > 6 && shipDir == 'S') {
+					else if (shipY > 5 && shipDir == 'S') {
 						System.out.println("A Carrier would not fit here if placed to the south.");
 						continue;
 					}
-					else if (shipY < 5 && shipDir == 'N') {
+					else if (shipY < 4 && shipDir == 'N') {
 						System.out.println("A Carrier would not fit here if placed to the north.");
 						continue;
 					}
 				}
 				else if(shipType.equals("Battleship")){
 					shipLength = 4;
-					if (shipX < 5 && shipDir == 'W'){
+					if (shipX < 3 && shipDir == 'W'){
 						System.out.println("A Battleship would not fit here if placed to the west.");
 						continue;
 					}
-					else if (shipX > 22 && shipDir == 'E') {
+					else if (shipX > 21 && shipDir == 'E') {
 						System.out.println("A Battleship would not fit here if placed to the east.");
 						continue;
 					}
-					else if (shipY > 7 && shipDir == 'S') {
+					else if (shipY > 6 && shipDir == 'S') {
 						System.out.println("A Battleship would not fit here if placed to the south.");
 						continue;
 					}
-					else if (shipY < 4 && shipDir == 'N') {
+					else if (shipY < 3 && shipDir == 'N') {
 						System.out.println("A Battleship would not fit here if placed to the north.");
 						continue;
 					}
 				}
 				else if(shipType.equals("Submarine")){
 					shipLength = 3;
-					if (shipX < 3 && shipDir == 'W'){
+					if (shipX < 2 && shipDir == 'W'){
 						System.out.println("A Submarine would not fit here if placed to the west.");
 						continue;
 					}
-					else if (shipX > 23 && shipDir == 'E') {
+					else if (shipX > 22 && shipDir == 'E') {
 						System.out.println("A Submarine would not fit here if placed to the east.");
 						continue;
 					}
-					else if (shipY > 8 && shipDir == 'S') {
+					else if (shipY > 7 && shipDir == 'S') {
 						System.out.println("A Submarine would not fit here if placed to the south.");
 						continue;
 					}
-					else if (shipY < 3 && shipDir == 'N') {
+					else if (shipY < 2 && shipDir == 'N') {
 						System.out.println("A Submarine would not fit here if placed to the north.");
 						continue;
 					}
 				} 
 				else if(shipType.equals("Destroyer")){
 					shipLength = 2;
-					if (shipX < 3 && shipDir == 'W'){
+					if (shipX < 1 && shipDir == 'W'){
 						System.out.println("A carrier would not fit here if placed to the west.");
 						continue;
 					}
-					else if (shipX > 24 && shipDir == 'E') {
+					else if (shipX > 23 && shipDir == 'E') {
 						System.out.println("A carrier would not fit here if placed to the east.");
 						continue;
 					}
-					else if (shipY > 9 && shipDir == 'S') {
+					else if (shipY > 8 && shipDir == 'S') {
 						System.out.println("A carrier would not fit here if placed to the south.");
 						continue;
 					}
-					else if (shipY < 2 && shipDir == 'N') {
+					else if (shipY < 1 && shipDir == 'N') {
 						System.out.println("A carrier would not fit here if placed to the north.");
 						continue;
 					}
@@ -129,8 +124,23 @@ public class SinkShips{
 				}
 
 				Ship toPlace = new Ship(shipDir, shipLength, shipX, shipY); // Gör ettt nytt skepp med rätt riktning och längd
-				System.out.println(toPlace.length + " " + toPlace.dir);
-				placeShip(toPlace, playerBoard, fiveShips);
+
+			
+				switch(shipLength){
+					case 5: 
+						placeShip(toPlace, playerBoard, fiveShips);
+						break;
+					case 4:
+						placeShip(toPlace, playerBoard, fourShips);
+						break;
+					case 3:
+						placeShip(toPlace, playerBoard, threeShips);
+						break;
+					case 2:
+						placeShip(toPlace, playerBoard, twoShips);
+						break;
+				}
+
 
 
 				
@@ -154,93 +164,109 @@ public class SinkShips{
 	}
 
 	public static void printBoard(char[] board){ // skriver ut spelbrädor  Så att de ser 2d ut
-		for(int y = 0; y < 11; y++){
-				for(int x = 0; x < 26; x++){
-					if (y == 0 && x == 0){
-						System.out.print(board[(26*y) + x] + "  ");
+		for(int y = 0; y < 10; y++){
+			for(int x = 0; x < 26; x++){
+				if( x == 0 && y == 0){
+					for(int c = 0; c < 25; c++){
+						if (c == 0){
+							System.out.print("  ");
+							System.out.print((char)((int) 'A' + c) + " ");
+						}
+						else{
+							System.out.print((char)((int) 'A' + c) + " ");
+						}
+					}
+					System.out.println();
+					System.out.print((char)((int)'0' + y) + " ");
+					continue;
+				}
+				else{
+					if (x == 0){
+						System.out.print((char)((int)'0' + y) + " ");
 					}
 					else{
-						System.out.print(board[(26*y) + x] + " ");
+						System.out.print(board[25 * y  + x - 1] + " ");
 					}
 				}
-			System.out.print(System.lineSeparator());
 			}
+			System.out.println();	
+		}
 	}
 
 	public static void boardMaker(char[] board){
-		for(int a = 0; a < 11; a++){
-			for (int b = 0; b < 26; b++){
-				if(a > 0){
-					if(b == 0){
-						board[(a*26)] = (char)((int) '0' + (a - 1));
-					}
-					else {
-						board[(a*26) + b] = 'X';
-					}
-				}
-				else{
-					if(b != 25){
-						board[b +1] = (char)((int) 'A' + b);
-					}
-				}
+		for(int a = 0; a < 10; a++){
+			for (int b = 0; b < 25; b++){
+				board[(a*25) + b] = 'X';
 			}
 		} // fyller spelbrädan med X och säter ut  koordinaters
 	}
 
 	public static void placeShip(Ship ship, char[] board, int[] shipAmmount){
-		if(shipAmmount[0] < 1){
-			System.out.println("a");
-			if(canPlace(ship, board)){
-				System.out.println("b");
-				for (int i = 0; i < ship.length; i++){
-					System.out.print(ship.coordArray[2*i] + ", ");
-					System.out.println(board[26 * (ship.coordArray[1 + (2 * i)] + ship.coordArray[2 * i])]);
-					board[26*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[2 * i]] = ship.looks[i];					
+		if (ship.length == 5){
+			if(shipAmmount[0] < 1){
+				if(canPlace(ship, board)){
+					for (int i = 0; i < ship.length; i++){
+						board[25*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+					}
+					shipAmmount[0]++;
 				}
-				shipAmmount[0]++;
 			}
-
+			else{
+				System.out.println("All Carriers have been placed");
+			}
 		}
-		if(shipAmmount[0] < 2){
-			if(canPlace(ship, board)){
-				for (int i = 0; i < ship.length; i++){
-					board[26*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+		if (ship.length == 4){
+			if(shipAmmount[0] < 2){
+				if(canPlace(ship, board)){
+					for (int i = 0; i < ship.length; i++){
+						board[25*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+					}
+					shipAmmount[0]++;
 				}
-				shipAmmount[0]++;
 			}
-
+			else{
+				System.out.println("All Battleships have been placed");
+			}
 		}
-		if(shipAmmount[0] < 4){
-			if(canPlace(ship, board)){
-				for (int i = 0; i < ship.length; i++){
-					board[26*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+		if (ship.length == 3){
+			if(shipAmmount[0] < 4){
+				if(canPlace(ship, board)){
+					for (int i = 0; i < ship.length; i++){
+						board[25*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+					}
+					shipAmmount[0]++;
 				}
-				shipAmmount[0]++;
 			}
-
+			else{
+				System.out.println("All Submarines have been placed");
+			}
 		}
-		if(shipAmmount[0] < 5){
-			if(canPlace(ship, board)){
-				for (int i = 0; i < ship.length; i++){
-					board[26*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+		if (ship.length == 2){
+			if(shipAmmount[0] < 5){
+				if(canPlace(ship, board)){
+					for (int i = 0; i < ship.length; i++){
+						board[25*(ship.coordArray[1 + (2*i)]) +	ship.coordArray[0 + (2*i)]] = ship.looks[i];					
+					}
+					shipAmmount[0]++;
 				}
-				shipAmmount[0]++;
 			}
-
+			else{
+				System.out.println("All Destroyers have been placed");
+			}
 		}
 	}
 
 	/* Kolla riktningen, Kolla start koordinater, om den går norrut koll om dedn ligger på botten eller mot någon
 	*/
 	public static boolean canPlace(Ship ship, char[] board){
-		for (int i = 0; i < ship.length; i++){
-			if (board[26*(ship.sideCoords[1 + (2*i)]) + ship.sideCoords[0 + (2*i)]] != 'X'){
-			return false;
+		char[] charCoords = ship.sideCoords.toCharArray();
+		for(int a = 0; a < charCoords.length/ 2; a++){
+			System.out.println((int)charCoords[a * 2] + " " + (int)charCoords[1 + (a*2)]);
+			if(board[25* ((int)charCoords[1 +(a * 2)]) + (int)charCoords[a*2]] != 'X'){
+				return false;
 			}
 		}
-
-	return true;
-		
-	}
+		return true;
+	}	
 
 }
